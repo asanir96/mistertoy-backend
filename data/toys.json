@@ -86,7 +86,7 @@
   },
   {
     "_id": "t108",
-    "name": "Electric Robot",
+    "name": "Electric Robots",
     "imgUrl": "hardcoded-url-for-now",
     "price": 199,
     "labels": [
@@ -135,13 +135,31 @@
     "_id": "t112",
     "name": "Outdoor Bubble Machine",
     "imgUrl": "hardcoded-url-for-now",
-    "price": 135,
+    "price": 137,
     "labels": [
       "Outdoor",
       "Battery Powered",
       "Baby"
     ],
     "createdAt": 1743031801011,
-    "inStock": false
+    "inStock": true
+  },
+  {
+    "name": "sdadassda",
+    "price": 3,
+    "inStock": false,
+    "_id": "POkaI"
+  },
+  {
+    "name": "test",
+    "price": 4,
+    "inStock": true,
+    "_id": "Em01B"
+  },
+  {
+    "name": "2test",
+    "price": 3,
+    "inStock": false,
+    "_id": "Zca8t"
   }
 ]

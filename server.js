@@ -30,7 +30,7 @@ app.set('query parser', 'extended') // allow sending arrays and objects in query
 
 // Express Routing:
 
-// REST API for Cars
+// REST API for toys
 app.get('/api/toy', (req, res) => {
     const filterBy = {
         name: req.query.name || '',
@@ -73,7 +73,7 @@ app.post('/api/toy', (req, res) => {
     const toy = {
         name: req.body.name,
         price: +req.body.price,
-        inStock: req.body.inStock === 'true',
+        inStock: req.body.inStock,
     }
 
     toyService.save(toy)
@@ -91,7 +91,7 @@ app.put('/api/toy/:toyId', (req, res) => {
         _id: req.params.toyId,
         name: req.body.name,
         price: +req.body.price,
-        inStock: req.body.inStock === 'true',
+        inStock: req.body.inStock,
     }
 
     toyService.save(toy)

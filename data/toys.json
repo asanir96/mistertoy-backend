@@ -1,0 +1,147 @@
+[
+  {
+    "_id": "t101",
+    "name": "Talking Doll",
+    "imgUrl": "../assets/img/horse-toys-icon.png",
+    "price": 123,
+    "labels": [
+      "Doll",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": 1631031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t102",
+    "name": "Lego City Police Station",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 249,
+    "labels": [
+      "Puzzle",
+      "Art"
+    ],
+    "createdAt": 1642031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t103",
+    "name": "Remote Control Car",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 182,
+    "labels": [
+      "On wheels",
+      "Battery Powered",
+      "Outdoor"
+    ],
+    "createdAt": 1653031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t104",
+    "name": "Wooden Shape Sorter",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 69,
+    "labels": [
+      "Baby",
+      "Puzzle"
+    ],
+    "createdAt": 1664031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t105",
+    "name": "Watercolor Painting Kit",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 89,
+    "labels": [
+      "Art"
+    ],
+    "createdAt": 1675031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t106",
+    "name": "Board Game: Treasure Hunt",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 115,
+    "labels": [
+      "Box game",
+      "Puzzle"
+    ],
+    "createdAt": 1686031801011,
+    "inStock": false
+  },
+  {
+    "_id": "t107",
+    "name": "Teddy Bear",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 55,
+    "labels": [
+      "Baby",
+      "Doll"
+    ],
+    "createdAt": 1697031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t108",
+    "name": "Electric Robot",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 199,
+    "labels": [
+      "Battery Powered",
+      "Puzzle"
+    ],
+    "createdAt": 1708031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t109",
+    "name": "Kids Football Set",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 79,
+    "labels": [
+      "Outdoor"
+    ],
+    "createdAt": 1719031801011,
+    "inStock": false
+  },
+  {
+    "_id": "t110",
+    "name": "Toy Fire Truck",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 99,
+    "labels": [
+      "On wheels",
+      "Battery Powered"
+    ],
+    "createdAt": 1721031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t111",
+    "name": "1000-Piece Jigsaw Puzzle",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 65,
+    "labels": [
+      "Puzzle",
+      "Art"
+    ],
+    "createdAt": 1732031801011,
+    "inStock": true
+  },
+  {
+    "_id": "t112",
+    "name": "Outdoor Bubble Machine",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 135,
+    "labels": [
+      "Outdoor",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": 1743031801011,
+    "inStock": false
+  }
+]

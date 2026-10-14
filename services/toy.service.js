@@ -7,7 +7,8 @@ export const toyService = {
     query,
     getById,
     remove,
-    save
+    save,
+    getStats
 }
 
 const PAGE_SIZE = 5
@@ -15,7 +16,7 @@ const toys = utilService.readJsonFile('data/toys.json')
 
 function query(queryOptions = { filterBy: {}, sort: {} }) {
     const { filterBy, sort } = queryOptions
-
+    const stats = getStats(toys)
     let toysToReturn = [...toys]
 
     if (filterBy && filterBy.name) {
@@ -33,7 +34,7 @@ function query(queryOptions = { filterBy: {}, sort: {} }) {
 
     if (sort) toysToReturn = _getSortedToys(toysToReturn, sort)
     console.log('sort', sort)
-    return Promise.resolve(toysToReturn)
+    return Promise.resolve({ stats, toys: toysToReturn })
 }
 
 function getById(toyId) {
@@ -99,4 +100,43 @@ function _getSortedToys(toys, sort) {
 
 
     return sortedToys
+}
+
+function getStats() {
+    const toyCountByLabel = _getToyCountByLabel(toys)
+    const priceByLabel = _getPriceByLabel(toys)
+
+    const avgPriceByLabel = {}
+    for (var label in priceByLabel) {
+        avgPriceByLabel[label] = priceByLabel[label] / toyCountByLabel[label]
+    }
+
+    const stats = { avgPriceByLabel, toyCountByLabel }
+
+    return Promise.resolve(stats)
+}
+
+
+function _getToyCountByLabel(toys) {
+    return toys.reduce((acc, toy) => {
+
+        toy.labels?.forEach(label => {
+            if (label in acc) acc[label]++
+            else acc[label] = 1
+        })
+
+        return acc
+    }, {})
+}
+
+function _getPriceByLabel(toys) {
+    return toys.reduce((acc, toy) => {
+
+        toy.labels?.forEach(label => {
+            if (label in acc) acc[label] += toy.price
+            else acc[label] = toy.price
+        })
+
+        return acc
+    }, {})
 }

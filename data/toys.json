@@ -38,18 +38,6 @@
     "inStock": true
   },
   {
-    "_id": "t104",
-    "name": "Wooden Shape Sorter",
-    "imgUrl": "hardcoded-url-for-now",
-    "price": 69,
-    "labels": [
-      "Baby",
-      "Puzzle"
-    ],
-    "createdAt": 1664031801011,
-    "inStock": true
-  },
-  {
     "_id": "t105",
     "name": "Watercolor Painting Kit",
     "imgUrl": "hardcoded-url-for-now",
@@ -161,5 +149,17 @@
     "price": 3,
     "inStock": false,
     "_id": "Zca8t"
+  },
+  {
+    "name": "dsaddsa",
+    "price": 4,
+    "inStock": true,
+    "_id": "KBDc7"
+  },
+  {
+    "name": "hi",
+    "price": 0,
+    "inStock": true,
+    "_id": "7dsbC"
   }
 ]

@@ -54,6 +54,15 @@ app.get('/api/toy', (req, res) => {
         })
 })
 
+app.get('/api/toy/stats', (req, res) => {
+    toyService.getStats()
+        .then(stats => res.send(stats))
+        .catch(err => {
+            loggerService.error('Cannot get toy', err)
+            res.status(400).send('Cannot get toy')
+        })
+})
+
 app.get('/api/toy/:toyId', (req, res) => {
     const { toyId } = req.params
 

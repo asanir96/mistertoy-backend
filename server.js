@@ -74,6 +74,7 @@ app.post('/api/toy', (req, res) => {
         name: req.body.name,
         price: +req.body.price,
         inStock: req.body.inStock,
+        labels: req.body.labels || []
     }
 
     toyService.save(toy)
@@ -86,12 +87,12 @@ app.post('/api/toy', (req, res) => {
 
 app.put('/api/toy/:toyId', (req, res) => {
 
-    console.log('eq.body.inStock', req.body.inStock)
     const toy = {
         _id: req.params.toyId,
         name: req.body.name,
         price: +req.body.price,
         inStock: req.body.inStock,
+        labels: req.body.labels
     }
 
     toyService.save(toy)

@@ -57,6 +57,7 @@ function save(toy) {
         toyToUpdate.name = toy.name
         toyToUpdate.price = toy.price
         toyToUpdate.inStock = toy.inStock
+        toyToUpdate.labels = toy.labels
 
         toy = toyToUpdate
     } else {

@@ -5,7 +5,6 @@
     "imgUrl": "../assets/img/horse-toys-icon.png",
     "price": 123,
     "labels": [
-      "Doll",
       "Battery Powered",
       "Baby"
     ],
@@ -62,12 +61,12 @@
   },
   {
     "_id": "t106",
-    "name": "Board Game: Treasure Hunt",
+    "name": "soard Game: Treasure Hunt",
     "imgUrl": "hardcoded-url-for-now",
-    "price": 115,
+    "price": 120,
     "labels": [
       "Box game",
-      "Puzzle"
+      "Baby"
     ],
     "createdAt": 1686031801011,
     "inStock": false
@@ -78,11 +77,10 @@
     "imgUrl": "hardcoded-url-for-now",
     "price": 55,
     "labels": [
-      "Baby",
       "Doll"
     ],
     "createdAt": 1697031801011,
-    "inStock": true
+    "inStock": false
   },
   {
     "_id": "t108",
@@ -145,21 +143,63 @@
     "inStock": true
   },
   {
-    "name": "sdadassda",
-    "price": 3,
-    "inStock": false,
-    "_id": "POkaI"
-  },
-  {
     "name": "test",
     "price": 4,
     "inStock": true,
     "_id": "Em01B"
   },
   {
-    "name": "2test",
+    "name": "dsaddsa",
+    "price": 9,
+    "inStock": true,
+    "_id": "KBDc7"
+  },
+  {
+    "name": "hi",
+    "price": 0,
+    "inStock": true,
+    "_id": "7dsbC"
+  },
+  {
+    "name": "gfhgh",
+    "price": 4,
+    "inStock": true,
+    "_id": "j1CA1",
+    "labels": [
+      "Box game"
+    ]
+  },
+  {
+    "name": "asa",
+    "price": 7,
+    "inStock": true,
+    "_id": "w1BIt",
+    "labels": [
+      "On wheels",
+      "Art"
+    ]
+  },
+  {
+    "name": "asdsad",
     "price": 3,
     "inStock": false,
-    "_id": "Zca8t"
+    "_id": "som93"
+  },
+  {
+    "name": "jhgvjhh",
+    "price": 2,
+    "inStock": true,
+    "labels": [],
+    "_id": "KDdEV"
+  },
+  {
+    "name": "TestAsa",
+    "price": 6,
+    "inStock": false,
+    "labels": [
+      "Box game",
+      "On wheels"
+    ],
+    "_id": "kdGlx"
   }
 ]

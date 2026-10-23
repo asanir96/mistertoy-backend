@@ -14,7 +14,7 @@ export const toyService = {
 const PAGE_SIZE = 5
 const toys = utilService.readJsonFile('data/toys.json')
 
-function query(queryOptions = { filterBy: {}, sort: {} }) {
+async function query(queryOptions = { filterBy: {}, sort: {} }) {
     const { filterBy, sort } = queryOptions
     const stats = getStats(toys)
     let toysToReturn = [...toys]
@@ -33,25 +33,25 @@ function query(queryOptions = { filterBy: {}, sort: {} }) {
     }
 
     if (sort) toysToReturn = _getSortedToys(toysToReturn, sort)
-    console.log('sort', sort)
-    return Promise.resolve({ stats, toys: toysToReturn })
+
+    return { stats, toys: toysToReturn }
 }
 
-function getById(toyId) {
+async function getById(toyId) {
     const toy = toys.find(toy => toy._id === toyId)
-    return Promise.resolve(toy)
+    return toy
 }
 
-function remove(toyId) {
+async function remove(toyId) {
     const idx = toys.findIndex(toy => toy._id === toyId)
 
-    if (idx === -1) return Promise.reject('No such toy')
+    if (idx === -1) throw new Error('No such toy')
 
     toys.splice(idx, 1)
-    return _saveToysToFile()
+    await _saveToysToFile()
 }
 
-function save(toy) {
+async function save(toy) {
     if (toy._id) {
         const toyToUpdate = toys.find(currToy => currToy._id === toy._id)
 
@@ -66,22 +66,23 @@ function save(toy) {
         toys.push(toy)
     }
 
-    return _saveToysToFile().then(() => toy)
+    await _saveToysToFile()
+    return toy
 }
 
 
-function _saveToysToFile() {
-    return new Promise((resolve, reject) => {
-        const data = JSON.stringify(toys, null, 2)
-        fs.writeFile('data/toys.json', data, (err) => {
-            if (err) {
-                loggerService.error('Cannot write to toys file', err)
-                return reject(err)
-            }
-            resolve()
-        })
+async function _saveToysToFile() {
+
+    const data = JSON.stringify(toys, null, 2)
+    
+    fs.writeFile('data/toys.json', data, (err) => {
+        if (err) {
+            loggerService.error('Cannot write to toys file', err)
+            throw new Error(err)
+        }
     })
 }
+
 
 
 function _getSortedToys(toys, sort) {
@@ -103,7 +104,7 @@ function _getSortedToys(toys, sort) {
     return sortedToys
 }
 
-function getStats() {
+async function getStats() {
     const toyCountByLabel = _getToyCountByLabel(toys)
     const priceByLabel = _getPriceByLabel(toys)
 
@@ -114,7 +115,7 @@ function getStats() {
 
     const stats = { avgPriceByLabel, toyCountByLabel }
 
-    return Promise.resolve(stats)
+    return stats
 }
 
 

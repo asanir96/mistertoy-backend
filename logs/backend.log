@@ -39,3 +39,7 @@
 18.10.2026, 6:21:04 - INFO - Server listening on port http://127.0.0.1:3030/
 18.10.2026, 6:21:41 - INFO - Server listening on port http://127.0.0.1:3030/
 18.10.2026, 6:21:43 - INFO - Server listening on port http://127.0.0.1:3030/
+24.10.2026, 20:48:18 - ERROR - Cannot save toy | Error: Could not save toys
+24.10.2026, 20:49:36 - INFO - Server listening on port http://127.0.0.1:3030/
+24.10.2026, 20:49:39 - INFO - Server listening on port http://127.0.0.1:3030/
+24.10.2026, 20:49:40 - INFO - Server listening on port http://127.0.0.1:3030/

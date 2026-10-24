@@ -33,7 +33,7 @@ async function query(queryOptions = { filterBy: {}, sort: {} }) {
 
     if (sort) toysToReturn = _getSortedToys(toysToReturn, sort)
 
-    return {  toys: toysToReturn }
+    return { toys: toysToReturn }
 }
 
 async function getById(toyId) {
@@ -51,7 +51,7 @@ async function remove(toyId) {
     try {
         await _saveToysToFile()
     } catch (err) {
-        throw new Error('Could not save toys',{ cause: err })
+        throw new Error('Could not save toys', { cause: err })
     }
 }
 
@@ -75,13 +75,12 @@ async function save(toy) {
         return toy
 
     } catch (err) {
-        throw new Error('Could not save toys',{ cause: err })
+        throw new Error('Could not save toys', { cause: err })
     }
 }
 
 
 function _saveToysToFile() {
-    throw new Error('hi')
     return new Promise((resolve, reject) => {
         const data = JSON.stringify(toys, null, 2)
         fs.writeFile('data/toys.json', data, (err) => {
@@ -89,8 +88,8 @@ function _saveToysToFile() {
                 loggerService.error('Cannot write to toys file', err)
                 return reject(err)
             }
-            
-            // return resolve()
+
+            return resolve()
         })
     })
 }

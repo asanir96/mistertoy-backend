@@ -126,8 +126,8 @@ app.delete('/api/toy/:toyId', async (req, res) => {
         await toyService.remove(toyId)
         res.send('Removed!')
     } catch (err) {
-        loggerService.error('Cannot remove toy', err)
-        res.status(400).send('Cannot remove toy')
+        loggerService.error('Cannot remove toy', err,err.cause)
+        res.status(400).send(err)
     }
 })
 

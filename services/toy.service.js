@@ -16,7 +16,6 @@ const toys = utilService.readJsonFile('data/toys.json')
 
 async function query(queryOptions = { filterBy: {}, sort: {} }) {
     const { filterBy, sort } = queryOptions
-    const stats = getStats(toys)
     let toysToReturn = [...toys]
 
     if (filterBy && filterBy.name) {
@@ -34,7 +33,7 @@ async function query(queryOptions = { filterBy: {}, sort: {} }) {
 
     if (sort) toysToReturn = _getSortedToys(toysToReturn, sort)
 
-    return { stats, toys: toysToReturn }
+    return {  toys: toysToReturn }
 }
 
 async function getById(toyId) {
@@ -48,7 +47,12 @@ async function remove(toyId) {
     if (idx === -1) throw new Error('No such toy')
 
     toys.splice(idx, 1)
-    await _saveToysToFile()
+
+    try {
+        await _saveToysToFile()
+    } catch (err) {
+        throw new Error('Could not save toys',{ cause: err })
+    }
 }
 
 async function save(toy) {
@@ -66,20 +70,28 @@ async function save(toy) {
         toys.push(toy)
     }
 
-    await _saveToysToFile()
-    return toy
+    try {
+        await _saveToysToFile()
+        return toy
+
+    } catch (err) {
+        throw new Error('Could not save toys',{ cause: err })
+    }
 }
 
 
-async function _saveToysToFile() {
-
-    const data = JSON.stringify(toys, null, 2)
-    
-    fs.writeFile('data/toys.json', data, (err) => {
-        if (err) {
-            loggerService.error('Cannot write to toys file', err)
-            throw new Error(err)
-        }
+function _saveToysToFile() {
+    throw new Error('hi')
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify(toys, null, 2)
+        fs.writeFile('data/toys.json', data, (err) => {
+            if (err) {
+                loggerService.error('Cannot write to toys file', err)
+                return reject(err)
+            }
+            
+            // return resolve()
+        })
     })
 }
 

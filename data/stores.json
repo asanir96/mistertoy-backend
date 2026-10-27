@@ -1,0 +1,92 @@
+[
+    {
+        "_id": "loc101",
+        "storeId": "store1",
+        "name": "Toy Store - Herzliya",
+        "address": "7 Sokolov Street",
+        "city": "Herzliya",
+        "lat": 32.1656,
+        "lng": 34.844
+    },
+    {
+        "_id": "loc102",
+        "storeId": "store1",
+        "name": "Toy Store - Tel Aviv",
+        "address": "50 Dizengoff Street",
+        "city": "Tel Aviv",
+        "lat": 32.0753,
+        "lng": 34.7747
+    },
+    {
+        "_id": "loc103",
+        "storeId": "store2",
+        "name": "Toy Store - Jerusalem",
+        "address": "15 Jaffa Street",
+        "city": "Jerusalem",
+        "lat": 31.7819,
+        "lng": 35.2196
+    },
+    {
+        "_id": "loc104",
+        "storeId": "store2",
+        "name": "Toy Store - Haifa",
+        "address": "25 Herzl Street",
+        "city": "Haifa",
+        "lat": 32.8184,
+        "lng": 34.9896
+    },
+    {
+        "_id": "loc105",
+        "storeId": "store3",
+        "name": "Toy Store - Beer Sheva",
+        "address": "10 Rager Boulevard",
+        "city": "Be'er Sheva",
+        "lat": 31.2518,
+        "lng": 34.7913
+    },
+    {
+        "_id": "loc106",
+        "storeId": "store3",
+        "name": "Toy Store - Netanya",
+        "address": "12 Herzl Street",
+        "city": "Netanya",
+        "lat": 32.3329,
+        "lng": 34.8599
+    },
+    {
+        "_id": "loc107",
+        "storeId": "store1",
+        "name": "Toy Store - Rishon LeZion",
+        "address": "20 Rothschild Street",
+        "city": "Rishon LeZion",
+        "lat": 31.9642,
+        "lng": 34.8048
+    },
+    {
+        "_id": "loc108",
+        "storeId": "store2",
+        "name": "Toy Store - Eilat",
+        "address": "8 HaTmarim Boulevard",
+        "city": "Eilat",
+        "lat": 29.5577,
+        "lng": 34.9519
+    },
+    {
+        "_id": "loc109",
+        "storeId": "store3",
+        "name": "Toy Store - Petah Tikva",
+        "address": "18 Haim Ozer Street",
+        "city": "Petah Tikva",
+        "lat": 32.0878,
+        "lng": 34.8878
+    },
+    {
+        "_id": "loc110",
+        "storeId": "store1",
+        "name": "Toy Store - Ashdod",
+        "address": "14 Rogozin Street",
+        "city": "Ashdod",
+        "lat": 31.8044,
+        "lng": 34.6553
+    }
+]

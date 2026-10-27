@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import { toyService } from './services/toy.service.js'
 // import { userService } from './services/user.service.js'
 import { loggerService } from './services/logger.service.js'
+import { storeService } from './services/store.service.js'
 
 const app = express()
 const corsOptions = {
@@ -204,6 +205,27 @@ app.delete('/api/toy/:toyId', async (req, res) => {
 //     })
 // })
 
+
+app.get('/api/store', async (req, res) => {
+    const filterBy = {
+        city: req.query.city || '',
+    }
+
+    const sort = {
+        sortBy: req.query.sortBy || '',
+        sortDir: +req.query.sortDir || 1
+    }
+
+    const queryOptions = { filterBy, sort }
+
+    try {
+        const queriedStores = await storeService.query(queryOptions)
+        res.send(queriedStores)
+    } catch (err) {
+        loggerService.error('Cannot get stores', err)
+        res.status(400).send('Cannot get stores')
+    }
+})
 
 // Fallback route
 app.get('/**', (req, res) => {

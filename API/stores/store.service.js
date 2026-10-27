@@ -1,7 +1,7 @@
 
 import fs from 'fs'
-import { utilService } from './util.service.js'
-import { loggerService } from './logger.service.js'
+import { utilService } from '../../services/util.service.js'
+import { loggerService } from '../../services/logger.service.js'
 
 export const storeService = {
     query,

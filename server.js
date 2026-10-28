@@ -9,7 +9,7 @@ import { loggerService } from './services/logger.service.js'
 import { storeService } from './API/stores/store.service.js'
 import { toyRoutes } from './API/toys/toy.routes.js'
 import { storeRoutes } from './API/stores/store.routes.js'
-
+import { authRoutes } from './API/auth/auth.routes.js'
 const app = express()
 const corsOptions = {
     origin: [
@@ -32,9 +32,8 @@ app.use(express.json())
 app.set('query parser', 'extended') // allow sending arrays and objects in query params
 
 app.use('/api/toy',toyRoutes)
-
-
 app.use('/api/store',storeRoutes)
+app.use('/api/auth',authRoutes)
 
 // Fallback route
 app.get('/**', (req, res) => {

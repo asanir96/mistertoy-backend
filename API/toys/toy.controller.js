@@ -11,7 +11,7 @@ export async function getToys(req, res) {
     }
 
     const sort = {
-        sortBy: req.query.sortBy || '',
+        sortBy: req.query.sortBy || 'name',
         sortDir: +req.query.sortDir || 1
     }
 

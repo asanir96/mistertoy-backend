@@ -2,6 +2,8 @@
 import fs from 'fs'
 import { utilService } from '../../services/util.service.js'
 import { loggerService } from '../../services/logger.service.js'
+import { dbService } from '../../services/db.service.js'
+import { ObjectId } from 'mongodb'
 
 export const toyService = {
     query,
@@ -15,67 +17,87 @@ const PAGE_SIZE = 5
 const toys = utilService.readJsonFile('data/toys.json')
 
 async function query(queryOptions = { filterBy: {}, sort: {} }) {
-    const { filterBy, sort } = queryOptions
-    let toysToReturn = [...toys]
+    try {
+        const { filterBy, sort } = queryOptions
+        const criteria = {}
 
-    if (filterBy && filterBy.name) {
-        const regExp = new RegExp(filterBy.name, 'i')
-        toysToReturn = toysToReturn.filter(toy => regExp.test(toy.name))
+        if (filterBy && filterBy.name) {
+            criteria.name = { $regex: filterBy.name, $options: 'i' }
+        }
+
+        if (filterBy && filterBy.inStock !== undefined) {
+            criteria.inStock = filterBy.inStock
+        }
+
+        if (filterBy.labels && filterBy.labels.length > 0) {
+            criteria.labels = { $in: filterBy.labels }
+        }
+
+        const collection = await dbService.getCollection('toy')
+        const cursor = collection.find(criteria)
+
+        if (sort) {
+            const { sortBy, sortDir } = sort
+            cursor.sort({ [sortBy]: sortDir || 1 })
+        }
+        const toys = await cursor.toArray()
+
+        return { toys }
+    } catch (err) {
+        logger.error('cannot find toys', err)
+        throw err
     }
 
-    if (filterBy && filterBy.inStock !== undefined) {
-        toysToReturn = toysToReturn.filter(toy => toy.inStock === filterBy.inStock)
-    }
-
-    if (filterBy.labels && filterBy.labels.length > 0) {
-        toysToReturn = toysToReturn.filter(toy => toy.labels?.some(label => filterBy.labels.includes(label)))
-    }
-
-    if (sort) toysToReturn = _getSortedToys(toysToReturn, sort)
-
-    return { toys: toysToReturn }
 }
 
 async function getById(toyId) {
-    const toy = toys.find(toy => toy._id === toyId)
-    return toy
+    try {
+        const collection = await dbService.getCollection('toy')
+        const toy = await collection.findOne({ _id: ObjectId.createFromHexString(toyId) })
+        return toy
+    } catch (err) {
+        logger.error(`while finding toy ${toyId}`, err)
+        throw err
+    }
+
 }
 
 async function remove(toyId) {
-    const idx = toys.findIndex(toy => toy._id === toyId)
-
-    if (idx === -1) throw new Error('No such toy')
-
-    toys.splice(idx, 1)
-
     try {
-        await _saveToysToFile()
+        const collection = await dbService.getCollection('toy')
+        collection.deleteOne({ _id: ObjectId.createFromHexString(toyId) })
     } catch (err) {
-        throw new Error('Could not save toys', { cause: err })
+        logger.error(`cannot remove toy ${toyId}`, err)
+        throw err
     }
 }
 
 async function save(toy) {
     if (toy._id) {
-        const toyToUpdate = toys.find(currToy => currToy._id === toy._id)
-
-        toyToUpdate.name = toy.name
-        toyToUpdate.price = toy.price
-        toyToUpdate.inStock = toy.inStock
-        toyToUpdate.labels = toy.labels
-
-        toy = toyToUpdate
+        try {
+            const updatedFields = {
+                name: toy.name,
+                price: toy.price,
+                inStock: toy.inStock,
+                labels: toy.labels
+            }
+            const collection = await dbService.getCollection('toy')
+            const updatedToy = await collection.updateOne({ _id: ObjectId.createFromHexString(toy._id) }, { $set: updatedFields })
+            return updatedToy
+        } catch (err) {
+            logger.error(`cannot update toy ${toy._id}`, err)
+            throw err
+        }
     } else {
-        toy._id = utilService.makeId()
-        toys.push(toy)
-    }
+        try {
+            const collection = await dbService.getCollection('toy')
+            await collection.insertOne(toy)
+            return toy
+        } catch (err) {
+            logger.error('cannot insert car', err)
+            throw err
+        }
 
-    try {
-        await _saveToysToFile()
-        return toy
-
-    } catch (err) {
-        throw new Error('Could not save toys', { cause: err })
     }
 }
 

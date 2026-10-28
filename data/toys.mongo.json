@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Talking Doll",
+    "imgUrl": "../assets/img/horse-toys-icon.png",
+    "price": 123,
+    "labels": ["Battery Powered", "Baby"],
+    "createdAt": 1631031801011,
+    "inStock": true
+  },
+  {
+    "name": "Lego City Police Station",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 249,
+    "labels": ["Puzzle", "Art"],
+    "createdAt": 1642031801011,
+    "inStock": true
+  },
+  {
+    "name": "Remote Control Car",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 182,
+    "labels": ["On wheels", "Battery Powered", "Outdoor"],
+    "createdAt": 1653031801011,
+    "inStock": true
+  },
+  {
+    "name": "Watercolor Painting Kit",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 89,
+    "labels": ["Art"],
+    "createdAt": 1675031801011,
+    "inStock": true
+  },
+  {
+    "name": "soard Game: Treasure Hunt",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 120,
+    "labels": ["Box game", "Baby"],
+    "createdAt": 1686031801011,
+    "inStock": false
+  },
+  {
+    "name": "Teddy Bear",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 55,
+    "labels": ["Doll"],
+    "createdAt": 1697031801011,
+    "inStock": false
+  },
+  {
+    "name": "Electric Robots",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 199,
+    "labels": ["Battery Powered", "Puzzle"],
+    "createdAt": 1708031801011,
+    "inStock": true
+  },
+  {
+    "name": "Kids Football Set",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 79,
+    "labels": ["Outdoor"],
+    "createdAt": 1719031801011,
+    "inStock": false
+  },
+  {
+    "name": "Toy Fire Truck",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 99,
+    "labels": ["On wheels", "Battery Powered"],
+    "createdAt": 1721031801011,
+    "inStock": true
+  },
+  {
+    "name": "1000-Piece Jigsaw Puzzle",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 65,
+    "labels": ["Puzzle", "Art"],
+    "createdAt": 1732031801011,
+    "inStock": true
+  },
+  {
+    "name": "Outdoor Bubble Machine",
+    "imgUrl": "hardcoded-url-for-now",
+    "price": 137,
+    "labels": ["Outdoor", "Battery Powered", "Baby"],
+    "createdAt": 1743031801011,
+    "inStock": true
+  },
+  {
+    "name": "test",
+    "price": 4,
+    "inStock": true
+  },
+  {
+    "name": "dsaddsa",
+    "price": 9,
+    "inStock": true
+  },
+  {
+    "name": "hi",
+    "price": 0,
+    "inStock": true
+  },
+  {
+    "name": "gfhgh",
+    "price": 4,
+    "inStock": true,
+    "labels": ["Box game"]
+  },
+  {
+    "name": "asa",
+    "price": 7,
+    "inStock": true,
+    "labels": ["On wheels", "Art"]
+  },
+  {
+    "name": "asdsad",
+    "price": 3,
+    "inStock": false
+  },
+  {
+    "name": "jhgvjhh",
+    "price": 2,
+    "inStock": true,
+    "labels": []
+  },
+  {
+    "name": "TestAsa",
+    "price": 6,
+    "inStock": false,
+    "labels": ["Box game", "On wheels"]
+  }
+]

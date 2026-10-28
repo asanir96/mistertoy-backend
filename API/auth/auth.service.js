@@ -1,11 +1,14 @@
 import { dbService } from "../../services/db.service.js"
 import { loggerService } from "../../services/logger.service.js"
 import Cryptr from 'cryptr'
+import bcrypt from 'bcrypt'
+import { userService } from "../user/user.service.js"
 
 
 export const authService = {
     checkLogin,
-    getLoginToken
+    getLoginToken,
+    validateToken
 }
 
 const cryptr = new Cryptr(process.env.SECRET1 || 'secret-puk-1234')
@@ -14,15 +17,16 @@ const cryptr = new Cryptr(process.env.SECRET1 || 'secret-puk-1234')
 
 async function checkLogin({ username, password }) {
     try {
-        const collection = await dbService.getCollection('user')
-        const user = await collection.findOne({ username, password })
+        const user = await userService.getByUsername(username)
+        if (!user) throw new Error('Invalid username or password')
 
-        if (!user) throw new Error('No such user')
+        const match = await bcrypt.compare(password, user.password)
+        if (!match) throw new Error('Invalid username or password')
 
         return {
             _id: user._id,
             username: user.username,
-            fullName: user.fullName,
+            fullname: user.fullname,
             isAdmin: user.isAdmin
         }
     } catch (err) {
@@ -34,6 +38,16 @@ async function checkLogin({ username, password }) {
 }
 
 function getLoginToken(user) {
-        const userInfo = {_id : user._id, username: user.username, isAdmin: user.isAdmin}
-    return cryptr.encrypt(JSON.stringify(userInfo))  
+    const userInfo = { _id: user._id, username: user.username, isAdmin: user.isAdmin }
+    return cryptr.encrypt(JSON.stringify(userInfo))
+}
+function validateToken(loginToken) {
+    try {
+        const decryptedToken = cryptr.decrypt(loginToken)
+        const loggedInUser = JSON.parse(decryptedToken)
+        return loggedInUser
+    } catch (err) {
+        console.log('Not a valid token')
+    }
+    return null
 }

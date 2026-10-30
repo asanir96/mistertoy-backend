@@ -85,7 +85,7 @@ async function save(toy) {
             const updatedToy = await collection.updateOne({ _id: ObjectId.createFromHexString(toy._id) }, { $set: updatedFields })
             return updatedToy
         } catch (err) {
-            logger.error(`cannot update toy ${toy._id}`, err)
+            loggerService.error(`cannot update toy ${toy._id}`, err)
             throw err
         }
     } else {
@@ -94,7 +94,7 @@ async function save(toy) {
             await collection.insertOne(toy)
             return toy
         } catch (err) {
-            logger.error('cannot insert car', err)
+            loggerService.error('cannot insert car', err)
             throw err
         }
 

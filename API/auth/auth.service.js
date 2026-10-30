@@ -8,6 +8,7 @@ import { userService } from "../user/user.service.js"
 export const authService = {
     checkLogin,
     getLoginToken,
+    signup,
     validateToken
 }
 
@@ -41,6 +42,18 @@ function getLoginToken(user) {
     const userInfo = { _id: user._id, username: user.username, isAdmin: user.isAdmin }
     return cryptr.encrypt(JSON.stringify(userInfo))
 }
+
+async function signup(username, password, fullname, isAdmin) {
+    const saltRounds = 10
+
+    loggerService.debug(`auth.service - signup with username: ${username}, fullname: ${fullname}`)
+    if (!username || !password || !fullname) throw new Error('Missing details')
+
+    const hash = await bcrypt.hash(password, saltRounds)
+    return userService.add({ username, password: hash, fullname, isAdmin })
+}
+
+
 function validateToken(loginToken) {
     try {
         const decryptedToken = cryptr.decrypt(loginToken)

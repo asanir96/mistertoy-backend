@@ -25,3 +25,21 @@ export async function logout(req, res) {
         res.status(500).send({ err: 'Failed to logout' })
     }
 }
+
+export async function signup(req, res) {
+    try {
+        const { username, password, fullname, isAdmin } = req.body
+
+        const account = await authService.signup(username, password, fullname, '' + isAdmin === 'true')
+        loggerService.debug(`auth.route - new account created: ` + JSON.stringify(account))
+
+        const user = await authService.checkLogin({username, password})
+        const loginToken = authService.getLoginToken(user)
+
+        res.cookie('loginToken', loginToken)
+        res.json(user)
+    } catch (err) {
+        loggerService.error('Failed to signup ' + err)
+        res.status(500).send({ err: 'Failed to signup' })
+    }
+}

@@ -71,16 +71,8 @@ export async function addToy(req, res) {
 }
 
 export async function updateToy(req, res) {
-
-    const toy = {
-        _id: req.params.toyId,
-        name: req.body.name,
-        price: +req.body.price,
-        inStock: req.body.inStock,
-        labels: req.body.labels
-    }
-
     try {
+        const toy = { _id: req.params.toyId, ...req.body }
         const savedToy = await toyService.save(toy)
         res.send(savedToy)
     } catch (err) {

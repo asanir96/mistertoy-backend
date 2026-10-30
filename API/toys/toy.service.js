@@ -75,12 +75,9 @@ async function remove(toyId) {
 async function save(toy) {
     if (toy._id) {
         try {
-            const updatedFields = {
-                name: toy.name,
-                price: toy.price,
-                inStock: toy.inStock,
-                labels: toy.labels
-            }
+            const updatedFields = { ...toy, _id: null }
+            delete updatedFields._id
+
             const collection = await dbService.getCollection('toy')
             const updatedToy = await collection.updateOne({ _id: ObjectId.createFromHexString(toy._id) }, { $set: updatedFields })
             return updatedToy

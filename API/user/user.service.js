@@ -10,7 +10,7 @@ export const userService = {
 
 async function add(user) {
     try {
-        const { username, fullname, password, isAdmin } = user
+        const { username, fullname, password } = user
         const existingUser = await getByUsername(username)
         console.log('existingUser',existingUser)
         if (existingUser) throw Error('Username exists')
@@ -19,7 +19,7 @@ async function add(user) {
             fullname,
             username,
             password,
-            isAdmin
+            isAdmin:false
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(newUser)
@@ -36,7 +36,6 @@ async function getByUsername(username) {
     try {
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ username })
-        console.log('user',user)
         return user
     } catch (err) {
         logger.error(`while finding user ${username}`, err)

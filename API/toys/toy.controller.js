@@ -93,3 +93,28 @@ export async function deleteToy(req, res) {
         res.status(400).send(err)
     }
 }
+
+export async function addToyMsg(req, res) {
+    try {
+        const { body, params, loggedInUser } = req
+
+        if (!loggedInUser) throw new Error('Not authorized')
+
+        const toyId = params.toyId
+        const msgTxt = body.msgTxt
+
+        const msg = {
+            txt: msgTxt,
+            by: {
+                _id: loggedInUser._id,
+                username: loggedInUser.username
+            }
+        }
+
+        const savedToy = await toyService.addMsg(toyId, msg)
+        res.send(savedToy)
+    } catch (err) {
+        loggerService.error('Cannot add message', err)
+        res.status(400).send('Cannot add message')
+    }
+}

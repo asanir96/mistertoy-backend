@@ -10,7 +10,8 @@ export const toyService = {
     getById,
     remove,
     save,
-    getStats
+    getStats,
+    addMsg
 }
 
 const PAGE_SIZE = 5
@@ -38,7 +39,10 @@ async function query(queryOptions = { filterBy: {}, sort: {} }) {
 
         if (sort) {
             const { sortBy, sortDir } = sort
-            cursor.sort({ [sortBy]: sortDir || 1 })
+            console.log('{ [sortBy]: sortDir || 1 }', { [sortBy]: sortDir || 1 })
+            console.log('cursor', cursor)
+            cursor.sort({ [sortBy]: sortDir || 1 }).collation({ locale: "en", strength: 2 })
+            console.log('cursor', cursor)
         }
         const toys = await cursor.toArray()
 
@@ -72,6 +76,8 @@ async function remove(toyId) {
     }
 }
 
+// TODO: Split save to update and add, and get rid of _id when update
+
 async function save(toy) {
     if (toy._id) {
         try {
@@ -98,41 +104,6 @@ async function save(toy) {
     }
 }
 
-
-function _saveToysToFile() {
-    return new Promise((resolve, reject) => {
-        const data = JSON.stringify(toys, null, 2)
-        fs.writeFile('data/toys.json', data, (err) => {
-            if (err) {
-                loggerService.error('Cannot write to toys file', err)
-                return reject(err)
-            }
-
-            return resolve()
-        })
-    })
-}
-
-
-
-function _getSortedToys(toys, sort) {
-    let sortedToys = [...toys]
-
-    switch (sort.sortBy) {
-        case 'name':
-            sortedToys = toys.sort((toy1, toy2) => toy1.name.localeCompare(toy2.name) * sort.sortDir)
-            break
-        case 'price':
-            sortedToys = toys.sort((toy1, toy2) => (toy1.price - toy2.price) * sort.sortDir)
-            break
-        case 'created':
-            sortedToys = toys.sort((toy1, toy2) => (toy1.createdAt - toy2.createdAt) * sort.sortDir)
-            break
-    }
-
-
-    return sortedToys
-}
 
 async function getStats() {
     const toyCountByLabel = _getToyCountByLabel(toys)
@@ -171,4 +142,25 @@ function _getPriceByLabel(toys) {
 
         return acc
     }, {})
+}
+
+async function addMsg(toyId, msg) {
+    try {
+        const { by, txt } = msg
+        const addedMsg = {
+            txt,
+            by: {
+                _id: ObjectId.createFromHexString(by._id),
+                username: by.username
+            },
+            id: utilService.makeId()
+        }
+
+        const collection = await dbService.getCollection('toy')
+        const updatedToy = await collection.updateOne({ _id: ObjectId.createFromHexString(toyId) }, { $push: { msgs: addedMsg } })
+        return updatedToy.msgs
+    } catch (err) {
+        loggerService.error(`cannot update toy ${toyId}`, err)
+        throw err
+    }
 }

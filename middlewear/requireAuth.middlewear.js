@@ -1,12 +1,14 @@
 import { authService } from "../API/auth/auth.service.js"
+import { asyncLocalStorage } from "../services/als.service.js"
 
-export async function requireAuth(req, res,next) {
+export async function requireAuth(req, res, next) {
+    let { loggedInUser } = asyncLocalStorage.getStore()
 
-    if (!req?.cookies?.loginToken) {
+    if (!loggedInUser) {
         return res.status(401).send('Not Authenticated')
     }
 
-    const loggedInUser = authService.validateToken(req.cookies.loginToken)
+    loggedInUser = authService.validateToken(req.cookies.loginToken)
     if (!loggedInUser) return res.status(401).send('Not Authenticated')
 
     req.loggedInUser = loggedInUser

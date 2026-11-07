@@ -153,12 +153,13 @@ async function addMsg(toyId, msg) {
                 _id: ObjectId.createFromHexString(by._id),
                 username: by.username
             },
-            id: utilService.makeId()
+            id: utilService.makeId(),
+            createdAt: Date.now()
         }
 
         const collection = await dbService.getCollection('toy')
         const updatedToy = await collection.updateOne({ _id: ObjectId.createFromHexString(toyId) }, { $push: { msgs: addedMsg } })
-        return updatedToy.msgs
+        return updatedToy
     } catch (err) {
         loggerService.error(`cannot update toy ${toyId}`, err)
         throw err

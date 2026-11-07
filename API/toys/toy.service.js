@@ -4,7 +4,7 @@ import { utilService } from '../../services/util.service.js'
 import { loggerService } from '../../services/logger.service.js'
 import { dbService } from '../../services/db.service.js'
 import { ObjectId } from 'mongodb'
-
+import { reviewService } from '../review/review.service.js'
 export const toyService = {
     query,
     getById,
@@ -56,8 +56,15 @@ async function query(queryOptions = { filterBy: {}, sort: {} }) {
 
 async function getById(toyId) {
     try {
-        const collection = await dbService.getCollection('toy')
-        const toy = await collection.findOne({ _id: ObjectId.createFromHexString(toyId) })
+        const toyCollection = await dbService.getCollection('toy')
+        const toy = await toyCollection.findOne({ _id: ObjectId.createFromHexString(toyId) })
+        
+        const reviews = await reviewService.query({toyId: ObjectId.createFromHexString(toyId)})
+        toy.toyReviews=reviews.map(review=>{
+            delete review.toy
+            return review
+        })
+        
         return toy
     } catch (err) {
         logger.error(`while finding toy ${toyId}`, err)

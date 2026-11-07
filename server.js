@@ -10,7 +10,9 @@ import { storeService } from './API/stores/store.service.js'
 import { toyRoutes } from './API/toys/toy.routes.js'
 import { storeRoutes } from './API/stores/store.routes.js'
 import { authRoutes } from './API/auth/auth.routes.js'
+import { reviewRoutes } from './API/review/review.routes.js'
 import { setupAsyncLocalStorage } from './middlewear/setupAls.middleware.js'
+
 const app = express()
 const corsOptions = {
     origin: [
@@ -22,6 +24,7 @@ const corsOptions = {
     ],
     credentials: true,
 }
+
 
 // Express Config:
 app.use(cors(corsOptions))
@@ -37,6 +40,7 @@ app.all('*', setupAsyncLocalStorage)
 app.use('/api/toy',toyRoutes)
 app.use('/api/store',storeRoutes)
 app.use('/api/auth',authRoutes)
+app.use('/api/review',reviewRoutes)
 
 // Fallback route
 app.get('/**', (req, res) => {

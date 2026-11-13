@@ -11,7 +11,8 @@ export const toyService = {
     remove,
     save,
     getStats,
-    addMsg
+    addMsg,
+    getByName
 }
 
 const PAGE_SIZE = 5
@@ -169,6 +170,18 @@ async function addMsg(toyId, msg) {
         return updatedToy
     } catch (err) {
         loggerService.error(`cannot update toy ${toyId}`, err)
+        throw err
+    }
+}
+
+async function getByName(name) {
+    try {
+        console.log('name',name)
+        const collection = await dbService.getCollection('toy')
+        const toys = await collection.find({ name: { $regex: name } }).toArray()
+        return toys
+    } catch (err) {
+        logger.error(`while finding user ${username}`, err)
         throw err
     }
 }

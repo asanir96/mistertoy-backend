@@ -11,6 +11,7 @@ import { toyRoutes } from './API/toys/toy.routes.js'
 import { storeRoutes } from './API/stores/store.routes.js'
 import { authRoutes } from './API/auth/auth.routes.js'
 import { reviewRoutes } from './API/review/review.routes.js'
+import { userRoutes } from './API/user/user.routes.js'
 import { setupAsyncLocalStorage } from './middlewear/setupAls.middleware.js'
 
 const app = express()
@@ -41,6 +42,7 @@ app.use('/api/toy',toyRoutes)
 app.use('/api/store',storeRoutes)
 app.use('/api/auth',authRoutes)
 app.use('/api/review',reviewRoutes)
+app.use('/api/user',userRoutes)
 
 // Fallback route
 app.get('/**', (req, res) => {
